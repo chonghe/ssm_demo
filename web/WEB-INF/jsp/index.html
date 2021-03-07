@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Views</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item,index) in books" >
+            {{item.bookName}}---{{item.detail}}
+        </li>
+    </ul>
+</div>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            books:[],
+        },
+        created(){
+            axios.get("http://localhost:8080/book/allbook").then( resp => {
+                this.books = resp.data;
+            })
+        }
+    })
+</script>
+</body>
+</html>
